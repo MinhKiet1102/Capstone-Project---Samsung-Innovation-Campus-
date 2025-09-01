@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phân tích bình luận</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.3/dist/sweetalert2.min.css">
+</head>
+<body>
+    <div class="background">
+        <div class="container">
+            <header class="header">
+                <div class="header-logo">
+                    <a href="testapp.html"><img src="{{ url_for('static', filename='SIC.png') }}" alt="Logo"></a>
+                </div>
+            </header>
+
+            <main class="main">
+                <h1 class="title">Đánh giá sản phẩm</h1>
+                <form class="form" action="/fetch_product" method="post">
+                    <div class="input-group">
+                        <input class="input-text-infor" type="text" placeholder="Nhập đường liên kết của sản phẩm (chỉ áp dụng với lazada)" name="product_url">
+                    </div>
+                    <button class="submit-btn-infor" type="submit">Lấy thông tin sản phẩm</button>
+                </form>
+                <!-- <div class="loader-overlay">
+                    <div class="loader">
+                        <div class="spinner"></div>
+                        <div class="loader-text" style="font-weight: bold;">Đang lấy thông tin sản phẩm</div>
+                    </div>
+                </div> -->
+                <div class="loader-overlay">
+                    <div class="loader">
+                        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                        <div class="loader-text" style="font-weight: bold; font-size: 20px;color: aqua;">Đang lấy thông tin sản phẩm</div>
+                    </div>
+                    
+                </div>
+
+                {% if product_name and product_image %}
+                    <div class="product-info">
+                        <h2>{{ product_name }}</h2>
+                        <img src="{{ product_image }}" alt="Product Image">
+                    </div>
+                    <form class="form" action="/predict" method="post">
+                        <input type="hidden" name="product_url" value="{{ product_url }}">
+                        <input type="hidden" name="product_name" value="{{ product_name }}">
+                        <input type="hidden" name="product_image" value="{{ product_image }}">
+                        <div class="input-group">
+                            <textarea class="input-text" placeholder="Nhập đánh giá sản phẩm của bạn tại đây" name="comment">{{ user_input if user_input else '' }}</textarea>
+                            <div class="custom-file-input">
+                                <label for="file-upload">
+                                <i class="fas fa-cloud-upload-alt"></i> 
+                                </label>
+                                <input id="file-upload" type="file" accept=".xlsx, .csv" style="display: none;" />
+                            </div>
+                        </div>
+                        <button class="submit-btn" type="submit">Phân tích</button>
+                    </form>
+                {% endif %}
+            </main>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.3/dist/sweetalert2.all.min.js"></script>
+<script>
+
+    window.onload = function() {
+        const prediction = "{{ prediction if prediction else '' }}";
+        if (prediction) {
+            Swal.fire({
+                title: prediction,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInUp animate__faster'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutDown animate__faster'
+                }
+            });
+        }
+
+        const loaderOverlay = document.querySelector('.loader-overlay');
+
+        const showLoader = () => {
+            loaderOverlay.style.display = 'flex';
+        };
+
+        const hideLoader = () => {
+            loaderOverlay.classList.add('loader-hidden');
+            setTimeout(() => loaderOverlay.style.display = 'none', 750);
+        };
+
+        document.querySelectorAll('.form').forEach(form => {
+            form.addEventListener('submit', function(event) {
+                const target = event.submitter;
+                const inputText = form.querySelector('.input-text-infor').value.trim();
+                
+                if (target && target.classList.contains('submit-btn-infor')) {
+                    if (!inputText) {
+                        event.preventDefault();
+                        Swal.fire({
+                            title: 'Vui lòng nhập đường liên kết của sản phẩm!',
+                            icon: 'warning',
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInUp animate__faster'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutDown animate__faster'
+                            }
+                        });
+                    } else {
+                        showLoader();
+                    }
+                }
+            });
+        });
+
+        window.addEventListener('load', hideLoader);
+
+        document.getElementById('file-upload').addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : '';
+            document.querySelector('.input-text').value = fileName ? `Đã chọn file: ${fileName}` : '';
+        });
+    };
+</script>
+</html>
