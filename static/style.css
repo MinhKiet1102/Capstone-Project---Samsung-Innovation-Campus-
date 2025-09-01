@@ -1,0 +1,385 @@
+/* Reset styles (tùy chọn) */
+* {
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+
+  }
+  
+  :root {
+    --samsung-blue: #1428A0;
+    --base-white: #FFFFFF;
+  }
+  
+  /* Responsive layout */
+  body, html {
+    font-family: Arial, sans-serif; 
+    margin: 0;
+    height: 100%;
+  }
+  
+  .background {
+    background: linear-gradient(-45deg, rgba(147, 26, 222, 0.83) 0%, rgba(28, 206, 234, 0.82) 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+  }
+
+  .loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .loader-hidden {
+      opacity: 0;
+      visibility: hidden;
+  }
+
+  /*.spinner {
+      width: 75px;
+      height: 75px;
+      border: 15px solid #ddd;
+      border-top-color: red;
+      border-radius: 50%;
+      animation: loading 0.75s ease infinite;
+  }
+
+  @keyframes loading {
+      from {
+          transform: rotate(0turn);
+      }
+      to {
+          transform: rotate(1turn);
+      }
+  }
+
+  .loader-text {
+      margin-top: 20px;
+      color: white;
+      font-size: 1.2em;
+  } */
+
+  
+.lds-spinner,
+.lds-spinner div,
+.lds-spinner div:after {
+  box-sizing: border-box;
+}
+.lds-spinner {
+  color: aqua;
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-spinner div {
+  transform-origin: 40px 40px;
+  animation: lds-spinner 1.2s linear infinite;
+}
+.lds-spinner div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 3.2px;
+  left: 36.8px;
+  width: 6.4px;
+  height: 17.6px;
+  border-radius: 20%;
+  background: currentColor;
+}
+.lds-spinner div:nth-child(1) {
+  transform: rotate(0deg);
+  animation-delay: -1.1s;
+}
+.lds-spinner div:nth-child(2) {
+  transform: rotate(30deg);
+  animation-delay: -1s;
+}
+.lds-spinner div:nth-child(3) {
+  transform: rotate(60deg);
+  animation-delay: -0.9s;
+}
+.lds-spinner div:nth-child(4) {
+  transform: rotate(90deg);
+  animation-delay: -0.8s;
+}
+.lds-spinner div:nth-child(5) {
+  transform: rotate(120deg);
+  animation-delay: -0.7s;
+}
+.lds-spinner div:nth-child(6) {
+  transform: rotate(150deg);
+  animation-delay: -0.6s;
+}
+.lds-spinner div:nth-child(7) {
+  transform: rotate(180deg);
+  animation-delay: -0.5s;
+}
+.lds-spinner div:nth-child(8) {
+  transform: rotate(210deg);
+  animation-delay: -0.4s;
+}
+.lds-spinner div:nth-child(9) {
+  transform: rotate(240deg);
+  animation-delay: -0.3s;
+}
+.lds-spinner div:nth-child(10) {
+  transform: rotate(270deg);
+  animation-delay: -0.2s;
+}
+.lds-spinner div:nth-child(11) {
+  transform: rotate(300deg);
+  animation-delay: -0.1s;
+}
+.lds-spinner div:nth-child(12) {
+  transform: rotate(330deg);
+  animation-delay: 0s;
+}
+@keyframes lds-spinner {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+
+  .container {
+    /* display: flex;
+    flex-direction: column;
+    min-height: 100vh;  Chiều cao tối thiểu 100% viewport
+    padding: 10px; Padding mặc định  */
+    text-align: center;
+    width: 80%; 
+    margin: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: center; /* Canh giữa các phần tử */
+    align-items: center;
+    padding: 20px;
+    height: 15vh;
+  }
+  
+  .header-logo {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .header-logo a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .header-logo img {
+    max-width: 85%; /* Chiều rộng tối đa cho logo */
+    height: auto; /* Giữ tỷ lệ của logo */
+  }
+  
+  
+  /* >= Tablet */
+  @media (min-width: 740px) {
+    .container {
+      padding: 20px;
+    }
+  
+    .header-logo img {
+      max-width: 60%;
+    }
+  }
+  
+  /* PC medium resolution > */
+  @media (min-width: 1113px) {
+    .container {
+      padding: 30px;
+    }
+
+    .header-logo img {
+      max-width: 60%;
+    }
+  }
+  
+  /* Tablet - PC low resolution */
+  @media (min-width: 740px) and (max-width: 1023px) {
+    .container {
+      padding: 20px;
+    }
+
+    .header-logo img {
+      max-width: 60%;
+    }
+  }
+  
+  /* > PC low resolution */
+  @media (min-width: 1024px) and (max-width: 1239px) {
+    .container {
+      padding: 25px;
+    }
+
+    .header-logo img {
+      max-width: 60%;
+    }
+  }
+  
+  .main {
+    flex: 1; /* Chiếm phần còn lại của container */
+    padding: 20px;
+  }
+  
+  .input-group {
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    height: 10vh;
+  }
+  
+  .input-text {
+    resize: none;
+    flex: 9;
+    padding: 10px; /* Khoảng trống */
+    border: 1px solid #ccc; /* Đường viền */
+    border-radius: 5px; /* Bán kính góc */
+    height: 100%;
+    width: 90%;
+  }
+
+  .input-text-infor {
+    resize: none;
+    flex: 9;
+    padding: 10px; /* Khoảng trống */
+    border: 1px solid #ccc; /* Đường viền */
+    border-radius: 5px; /* Bán kính góc */
+    height: 100%;
+    width: 90%;
+  }
+  
+
+
+  output {
+    flex: 9;
+    padding: 10px; /* Khoảng trống */
+    border: 1px solid #ccc; /* Đường viền */
+    border-radius: 5px; /* Bán kính góc */
+    height: 100%;
+    width: 90%;
+  }
+  
+  .custom-file-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    width: 10%; /* Điều chỉnh chiều rộng tùy ý */
+    height: 100%;
+    margin-left: 5px;
+  }
+  
+  .custom-file-input label {
+    display: flex; /* Sử dụng flexbox cho label */
+    align-items: center; /* Căn giữa icon theo chiều dọc trong label */
+    justify-content: center; /* Căn giữa icon theo chiều ngang trong label */
+    padding: 10px;
+    background-color: var(--base-white);
+    color: var(--samsung-blue);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out; /* Thêm transition cho top */
+    width: 100%; /* Chiếm toàn bộ chiều rộng của .custom-file-input */
+    height: 100%; /* Chiếm toàn bộ chiều cao của .custom-file-input */
+    position: relative;
+  }
+  
+  .custom-file-input label i {
+    font-size: 110%;
+  }
+  
+  .custom-file-input label::after {
+    content: "Choose file";
+    position: absolute;
+    top: 130%; /* Bắt đầu ngoài phạm vi hiển thị */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--samsung-blue);
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+    opacity: 0; /* Bắt đầu với độ mờ */
+    transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out; /* Thêm transition cho top và opacity */
+  }
+  
+  .custom-file-input:hover label::after {
+    top: 120%; /* Vị trí trung tâm khi hover */
+    opacity: 1; /* Độ mờ khi hover */
+  }
+  
+  .custom-file-input input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  button {
+    font-size: 16px; 
+  }
+  
+  .submit-btn, .submit-btn-infor {
+    padding: 10px 20px;
+    background-color: var(--samsung-blue); 
+    color: var(--base-white); 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; 
+    width: 100%; 
+    height: 8vh;
+    margin-top: 10px;
+  }
+  
+  .title {
+    text-align: center;
+  }
+
+  .product-info {
+    margin-top: 20px;
+}
+
+.product-info h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.product-info img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+}
+  
